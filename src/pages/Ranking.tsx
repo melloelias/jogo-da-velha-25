@@ -227,17 +227,21 @@ const Ranking = () => {
             </Table>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col gap-4">
+        <CardFooter className="flex justify-between items-center">
           <div className="text-sm text-muted-foreground">
             Total de registros: {filteredGames.length}
           </div>
           <Pagination>
             <PaginationContent>
               <PaginationItem>
-                <PaginationPrevious
+                <Button
+                  variant="ghost"
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                />
+                  className="gap-1 pl-2.5"
+                >
+                  <span>Anterior</span>
+                </Button>
               </PaginationItem>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <PaginationItem key={page}>
@@ -250,10 +254,14 @@ const Ranking = () => {
                 </PaginationItem>
               ))}
               <PaginationItem>
-                <PaginationNext
+                <Button
+                  variant="ghost"
                   onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                />
+                  className="gap-1 pr-2.5"
+                >
+                  <span>Próximo</span>
+                </Button>
               </PaginationItem>
             </PaginationContent>
           </Pagination>
