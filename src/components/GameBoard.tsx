@@ -47,16 +47,16 @@ const GameBoard = ({ player1, player2, onWin }: GameBoardProps) => {
   }, [board, player1, player2, onWin]);
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
+    <Card className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm border-purple-100 shadow-lg">
+      <CardHeader className="space-y-1">
         <CardTitle className="text-center">
           {currentPlayer === "X" ? (
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2 text-purple-600">
               <X className="w-5 h-5" />
               <span>Vez de {player1}</span>
             </div>
           ) : (
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2 text-pink-600">
               <Circle className="w-5 h-5" />
               <span>Vez de {player2}</span>
             </div>
@@ -73,9 +73,9 @@ const GameBoard = ({ player1, player2, onWin }: GameBoardProps) => {
               disabled={!!cell || winningCells.length > 0}
             >
               {cell === "X" ? (
-                <X className="w-8 h-8" />
+                <X className="w-8 h-8 text-purple-600" />
               ) : cell === "O" ? (
-                <Circle className="w-8 h-8" />
+                <Circle className="w-8 h-8 text-pink-600" />
               ) : null}
             </button>
           ))}

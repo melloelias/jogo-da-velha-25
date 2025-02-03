@@ -10,20 +10,20 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --primary: 262 83% 58%;
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.75rem;
+    --ring: 262 83% 58%;
+    --radius: 1rem;
   }
 }
 
@@ -32,7 +32,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -40,7 +40,7 @@
 .game-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
@@ -48,12 +48,14 @@
 
 .game-cell {
   aspect-ratio: 1;
-  @apply flex items-center justify-center text-4xl font-bold transition-all duration-200 
-         bg-white/50 backdrop-blur-sm border rounded-lg hover:bg-white/60;
+  @apply flex items-center justify-center text-4xl font-bold transition-all duration-300 
+         bg-white/80 backdrop-blur-sm border-2 border-purple-200 rounded-2xl 
+         hover:bg-white/90 hover:border-purple-400 hover:shadow-lg 
+         hover:scale-105 active:scale-95;
 }
 
 .game-cell.winning {
-  @apply bg-green-100 text-green-600;
+  @apply bg-gradient-to-br from-green-400 to-green-500 text-white border-none;
   animation: pulse 2s infinite;
 }
 

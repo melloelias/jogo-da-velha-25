@@ -5,12 +5,12 @@ const Navbar = () => {
   const location = useLocation();
   
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-lg border-b border-purple-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link to="/" className="flex items-center px-2">
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 JogoDaVelha
               </span>
             </Link>
@@ -18,20 +18,20 @@ const Navbar = () => {
           <div className="flex space-x-4">
             <Link
               to="/"
-              className={`inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
+              className={`inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
                 ${location.pathname === "/" 
-                  ? "text-black bg-gray-100" 
-                  : "text-gray-600 hover:text-black hover:bg-gray-50"}`}
+                  ? "text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md hover:shadow-lg" 
+                  : "text-gray-600 hover:text-purple-600 hover:bg-purple-50"}`}
             >
               <Home className="w-4 h-4 mr-2" />
               Jogar
             </Link>
             <Link
               to="/ranking"
-              className={`inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
+              className={`inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
                 ${location.pathname === "/ranking" 
-                  ? "text-black bg-gray-100" 
-                  : "text-gray-600 hover:text-black hover:bg-gray-50"}`}
+                  ? "text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md hover:shadow-lg" 
+                  : "text-gray-600 hover:text-purple-600 hover:bg-purple-50"}`}
             >
               <Trophy className="w-4 h-4 mr-2" />
               Ranking
