@@ -49,16 +49,21 @@ const Ranking = () => {
             onSort={handleSort}
           />
         </CardContent>
-        <CardFooter className="flex justify-between items-center">
-          <div className="text-sm text-muted-foreground">
-            Total de registros: {filteredGames.length}
+        <CardFooter className="flex flex-col gap-4">
+          <div className="w-full flex justify-between items-center">
+            <div className="text-sm text-muted-foreground">
+              Total de registros: {filteredGames.length}
+            </div>
+            <div className="ml-auto">
+              <RankingPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            </div>
           </div>
-          <div className="ml-auto">
-            <RankingPagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
+          <div className="text-sm text-muted-foreground text-center w-full border-t pt-4">
+            Desenvolvido por Ateliê de Propaganda - 2025
           </div>
         </CardFooter>
       </Card>
