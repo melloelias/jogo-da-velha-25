@@ -1,4 +1,6 @@
 import { format as dateFormat } from "date-fns";
+import jsPDF from "jspdf";
+import autoTable from 'jspdf-autotable';
 
 type Game = {
   id: string;
@@ -33,7 +35,37 @@ export const useExport = (games: Game[]) => {
       link.click();
       document.body.removeChild(link);
     } else if (exportFormat === 'pdf') {
-      console.log('Exportação PDF ainda não implementada');
+      const doc = new jsPDF();
+      
+      // Adiciona título
+      doc.setFontSize(16);
+      doc.text('Ranking de Vencedores', 14, 15);
+      
+      // Configura a tabela
+      autoTable(doc, {
+        head: [['Vencedor', 'Data', 'Hora']],
+        body: data.map(row => [
+          row.Vencedor || '-',
+          row.Data,
+          row.Hora
+        ]),
+        startY: 25,
+        headStyles: {
+          fillColor: [241, 196, 15], // Cor amarela para combinar com o ícone do troféu
+          textColor: [0, 0, 0],
+          fontStyle: 'bold'
+        },
+        styles: {
+          fontSize: 10,
+          cellPadding: 3,
+        },
+        alternateRowStyles: {
+          fillColor: [245, 245, 245]
+        }
+      });
+
+      // Salva o PDF
+      doc.save('ranking.pdf');
     }
   };
 
