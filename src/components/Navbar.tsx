@@ -9,8 +9,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
-            <Link to="/" className="flex items-center px-2 text-xl font-semibold">
-              Tic Tac Toe
+            <Link to="/" className="flex items-center px-2">
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                JogoDaVelha
+              </span>
             </Link>
           </div>
           <div className="flex space-x-4">
