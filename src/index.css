@@ -32,7 +32,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen;
+    @apply bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 min-h-screen;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
