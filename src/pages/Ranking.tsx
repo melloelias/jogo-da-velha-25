@@ -59,7 +59,7 @@ const Ranking = () => {
   const exportData = (format: 'csv' | 'xls' | 'pdf') => {
     const data = filteredGames.map(game => ({
       Vencedor: game.winner_name,
-      Data: format(new Date(game.created_at), "yyyy-MM-dd"),
+      Data: format(new Date(game.created_at), "dd/MM/yy"),
       Hora: format(new Date(game.created_at), "HH:mm"),
     }));
 
