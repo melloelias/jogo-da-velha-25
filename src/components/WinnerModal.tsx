@@ -24,13 +24,13 @@ const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
         <DialogHeader>
           <DialogTitle className="text-center flex flex-col items-center gap-4">
             <Trophy className="w-12 h-12 text-yellow-500" />
-            <span>Congratulations, {winner}!</span>
+            <span>Parabéns, {winner}!</span>
           </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-4 mt-4">
-          <Button onClick={onNewGame}>New Game</Button>
+          <Button onClick={onNewGame}>Novo Jogo</Button>
           <Button variant="outline" onClick={() => navigate("/ranking")}>
-            View Ranking
+            Ver Ranking
           </Button>
         </div>
       </DialogContent>

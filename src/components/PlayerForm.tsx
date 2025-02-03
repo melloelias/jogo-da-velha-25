@@ -22,7 +22,7 @@ const PlayerForm = ({ onStart }: PlayerFormProps) => {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-center">Enter Player Names</CardTitle>
+        <CardTitle className="text-center">Digite o Nome dos Jogadores</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -30,7 +30,7 @@ const PlayerForm = ({ onStart }: PlayerFormProps) => {
             <div className="flex items-center space-x-2">
               <X className="w-5 h-5" />
               <Input
-                placeholder="Player 1 Name"
+                placeholder="Nome do Jogador 1"
                 value={player1}
                 onChange={(e) => setPlayer1(e.target.value)}
                 className="flex-1"
@@ -41,7 +41,7 @@ const PlayerForm = ({ onStart }: PlayerFormProps) => {
             <div className="flex items-center space-x-2">
               <Circle className="w-5 h-5" />
               <Input
-                placeholder="Player 2 Name"
+                placeholder="Nome do Jogador 2"
                 value={player2}
                 onChange={(e) => setPlayer2(e.target.value)}
                 className="flex-1"
@@ -53,7 +53,7 @@ const PlayerForm = ({ onStart }: PlayerFormProps) => {
             className="w-full"
             disabled={!player1.trim() || !player2.trim()}
           >
-            Start Game
+            Iniciar Jogo
           </Button>
         </form>
       </CardContent>

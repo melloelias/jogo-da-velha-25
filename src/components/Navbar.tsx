@@ -24,7 +24,7 @@ const Navbar = () => {
                   : "text-gray-600 hover:text-black hover:bg-gray-50"}`}
             >
               <Home className="w-4 h-4 mr-2" />
-              Play
+              Jogar
             </Link>
             <Link
               to="/ranking"

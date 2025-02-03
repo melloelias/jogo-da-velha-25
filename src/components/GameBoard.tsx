@@ -53,12 +53,12 @@ const GameBoard = ({ player1, player2, onWin }: GameBoardProps) => {
           {currentPlayer === "X" ? (
             <div className="flex items-center justify-center gap-2">
               <X className="w-5 h-5" />
-              <span>{player1}'s Turn</span>
+              <span>Vez de {player1}</span>
             </div>
           ) : (
             <div className="flex items-center justify-center gap-2">
               <Circle className="w-5 h-5" />
-              <span>{player2}'s Turn</span>
+              <span>Vez de {player2}</span>
             </div>
           )}
         </CardTitle>

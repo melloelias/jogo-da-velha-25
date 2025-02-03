@@ -52,13 +52,13 @@ const Ranking = () => {
         <CardHeader>
           <CardTitle className="flex items-center justify-center gap-2">
             <Trophy className="w-6 h-6 text-yellow-500" />
-            <span>Winners Ranking</span>
+            <span>Ranking de Vencedores</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-4">
             <Input
-              placeholder="Search winners..."
+              placeholder="Buscar vencedores..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="max-w-sm"
@@ -69,9 +69,9 @@ const Ranking = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-12"></TableHead>
-                  <TableHead>Winner</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Time</TableHead>
+                  <TableHead>Vencedor</TableHead>
+                  <TableHead>Data</TableHead>
+                  <TableHead>Hora</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
