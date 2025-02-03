@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -10,19 +10,40 @@ import {
 import { Input } from "@/components/ui/input";
 import { Trophy } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
+import { format } from "date-fns";
 
-// This would come from a database in a real app
-const mockRanking = [
-  { id: 1, winner: "John", date: "2024-03-20", time: "14:30" },
-  { id: 2, winner: "Alice", date: "2024-03-20", time: "15:45" },
-  { id: 3, winner: "Bob", date: "2024-03-19", time: "16:20" },
-];
+type Game = {
+  id: string;
+  winner_name: string | null;
+  created_at: string;
+};
 
 const Ranking = () => {
   const [search, setSearch] = useState("");
+  const [games, setGames] = useState<Game[]>([]);
 
-  const filteredRanking = mockRanking.filter((entry) =>
-    entry.winner.toLowerCase().includes(search.toLowerCase())
+  useEffect(() => {
+    const fetchGames = async () => {
+      const { data, error } = await supabase
+        .from("games")
+        .select("*")
+        .not("winner_name", "is", null)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Error fetching games:", error);
+        return;
+      }
+
+      setGames(data || []);
+    };
+
+    fetchGames();
+  }, []);
+
+  const filteredGames = games.filter((game) =>
+    game.winner_name?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -54,16 +75,21 @@ const Ranking = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredRanking.map((entry) => (
-                  <TableRow key={entry.id}>
-                    <TableCell>
-                      <Trophy className="w-4 h-4 text-yellow-500" />
-                    </TableCell>
-                    <TableCell className="font-medium">{entry.winner}</TableCell>
-                    <TableCell>{entry.date}</TableCell>
-                    <TableCell>{entry.time}</TableCell>
-                  </TableRow>
-                ))}
+                {filteredGames.map((game) => {
+                  const date = new Date(game.created_at);
+                  return (
+                    <TableRow key={game.id}>
+                      <TableCell>
+                        <Trophy className="w-4 h-4 text-yellow-500" />
+                      </TableCell>
+                      <TableCell className="font-medium">
+                        {game.winner_name}
+                      </TableCell>
+                      <TableCell>{format(date, "yyyy-MM-dd")}</TableCell>
+                      <TableCell>{format(date, "HH:mm")}</TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </div>
