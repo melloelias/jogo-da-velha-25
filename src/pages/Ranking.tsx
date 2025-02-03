@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { RankingHeader } from "@/components/ranking/RankingHeader";
 import { RankingTable } from "@/components/ranking/RankingTable";
 import { RankingPagination } from "@/components/ranking/RankingPagination";
-import { format } from "date-fns";
+import { format as dateFormat } from "date-fns";
 
 type Game = {
   id: string;
@@ -56,17 +56,17 @@ const Ranking = () => {
     }));
   };
 
-  const exportData = (format: 'csv' | 'xls' | 'pdf') => {
+  const exportData = (exportFormat: 'csv' | 'xls' | 'pdf') => {
     const data = filteredGames.map(game => ({
       Vencedor: game.winner_name,
-      Data: format(new Date(game.created_at), "dd/MM/yy"),
-      Hora: format(new Date(game.created_at), "HH:mm"),
+      Data: dateFormat(new Date(game.created_at), "dd/MM/yy"),
+      Hora: dateFormat(new Date(game.created_at), "HH:mm"),
     }));
 
-    if (format === 'csv' || format === 'xls') {
+    if (exportFormat === 'csv' || exportFormat === 'xls') {
       const headers = ['Vencedor', 'Data', 'Hora'];
-      const separator = format === 'csv' ? ',' : '\t';
-      const fileExtension = format === 'csv' ? 'csv' : 'xls';
+      const separator = exportFormat === 'csv' ? ',' : '\t';
+      const fileExtension = exportFormat === 'csv' ? 'csv' : 'xls';
       
       const csvContent = [
         headers.join(separator),
@@ -81,7 +81,7 @@ const Ranking = () => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    } else if (format === 'pdf') {
+    } else if (exportFormat === 'pdf') {
       console.log('Exportação PDF ainda não implementada');
     }
   };
