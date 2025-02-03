@@ -77,7 +77,7 @@ export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) =
                 <TableCell className="font-medium">
                   {game.winner_name}
                 </TableCell>
-                <TableCell>{format(date, "dd/MM/yy")}</TableCell>
+                <TableCell>{format(date, "dd/MM/yyyy")}</TableCell>
                 <TableCell>{format(date, "HH:mm")}</TableCell>
               </TableRow>
             );
