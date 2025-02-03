@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { RankingHeader } from "@/components/ranking/RankingHeader";
 import { RankingTable } from "@/components/ranking/RankingTable";
 import { RankingPagination } from "@/components/ranking/RankingPagination";
+import { format } from "date-fns";
 
 type Game = {
   id: string;
@@ -133,11 +134,13 @@ const Ranking = () => {
           <div className="text-sm text-muted-foreground">
             Total de registros: {filteredGames.length}
           </div>
-          <RankingPagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
+          <div className="ml-auto">
+            <RankingPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
         </CardFooter>
       </Card>
     </div>
