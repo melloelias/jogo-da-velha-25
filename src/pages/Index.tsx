@@ -85,9 +85,9 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[600px]">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-full max-w-7xl px-4">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="flex justify-center w-full col-span-2 lg:col-span-1">
             {!gameState.started ? (
               <PlayerForm onStart={handleStart} />
