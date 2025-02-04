@@ -3,13 +3,14 @@ import PlayerForm from "@/components/PlayerForm";
 import GameBoard from "@/components/GameBoard";
 import WinnerModal from "@/components/WinnerModal";
 import { useToast } from "@/components/ui/use-toast";
-import { saveGame } from "@/services/api";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const [gameState, setGameState] = useState<{
     player1: string;
     player2: string;
     started: boolean;
+    gameId?: string;
   }>({
     player1: "",
     player2: "",
@@ -18,35 +19,64 @@ const Index = () => {
   const [winner, setWinner] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const handleStart = (player1: string, player2: string) => {
+  const handleStart = async (player1: string, player2: string) => {
     if (player1 === player2) {
       toast({
-        title: "Erro",
-        description: "Os jogadores precisam ter nomes diferentes",
+        title: "Error",
+        description: "Players must have different names",
         variant: "destructive",
       });
       return;
     }
 
-    setGameState({ player1, player2, started: true });
+    try {
+      // Create a new game record
+      const { data, error } = await supabase
+        .from("games")
+        .insert({
+          player1_name: player1,
+          player2_name: player2,
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setGameState({ 
+        player1, 
+        player2, 
+        started: true,
+        gameId: data.id 
+      });
+    } catch (error) {
+      console.error("Error creating game:", error);
+      toast({
+        title: "Error",
+        description: "Failed to start the game. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleWin = async (winner: string) => {
     setWinner(winner);
     
-    try {
-      await saveGame({
-        player1: gameState.player1,
-        player2: gameState.player2,
-        winner,
-      });
-    } catch (error) {
-      console.error("Error saving game result:", error);
-      toast({
-        title: "Erro",
-        description: "Não foi possível salvar o resultado do jogo",
-        variant: "destructive",
-      });
+    if (gameState.gameId) {
+      try {
+        const { error } = await supabase
+          .from("games")
+          .update({ winner_name: winner })
+          .eq("id", gameState.gameId);
+
+        if (error) throw error;
+      } catch (error) {
+        console.error("Error updating winner:", error);
+        toast({
+          title: "Error",
+          description: "Failed to save the game result. Please try again.",
+          variant: "destructive",
+        });
+      }
     }
   };
 

@@ -12,7 +12,7 @@ import { format } from "date-fns";
 
 type Game = {
   id: string;
-  winner: string | null;
+  winner_name: string | null;
   created_at: string;
 };
 
@@ -37,7 +37,7 @@ export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) =
             <TableHead>
               <Button
                 variant="ghost"
-                onClick={() => onSort('winner')}
+                onClick={() => onSort('winner_name')}
                 className="flex items-center gap-1"
               >
                 Vencedor
@@ -75,7 +75,7 @@ export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) =
                   <Trophy className="w-4 h-4 text-yellow-500" />
                 </TableCell>
                 <TableCell className="font-medium">
-                  {game.winner}
+                  {game.winner_name}
                 </TableCell>
                 <TableCell>{format(date, "dd/MM/yyyy")}</TableCell>
                 <TableCell>{format(date, "HH:mm")}</TableCell>
