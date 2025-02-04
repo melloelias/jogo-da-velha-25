@@ -1,4 +1,4 @@
-import { Trophy, ArrowUpDown } from "lucide-react";
+import { Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -41,7 +41,6 @@ export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) =
                 className="flex items-center gap-1"
               >
                 Vencedor
-                <ArrowUpDown className="h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
@@ -51,7 +50,6 @@ export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) =
                 className="flex items-center gap-1"
               >
                 Data
-                <ArrowUpDown className="h-4 w-4" />
               </Button>
             </TableHead>
             <TableHead>
@@ -61,7 +59,6 @@ export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) =
                 className="flex items-center gap-1"
               >
                 Hora
-                <ArrowUpDown className="h-4 w-4" />
               </Button>
             </TableHead>
           </TableRow>
