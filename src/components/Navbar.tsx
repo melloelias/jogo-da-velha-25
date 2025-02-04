@@ -18,7 +18,7 @@ const Navbar = () => {
           <div className="flex space-x-4">
             <Link
               to="/"
-              className={`inline-flex items-center px-4 py-1.5 rounded-xl text-sm font-medium transition-all duration-300
+              className={`inline-flex items-center px-4 py-1 rounded-xl text-sm font-medium transition-all duration-300
                 ${location.pathname === "/" 
                   ? "text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md hover:shadow-lg" 
                   : "text-white hover:text-purple-200"}`}
@@ -28,7 +28,7 @@ const Navbar = () => {
             </Link>
             <Link
               to="/ranking"
-              className={`inline-flex items-center px-4 py-1.5 rounded-xl text-sm font-medium transition-all duration-300
+              className={`inline-flex items-center px-4 py-1 rounded-xl text-sm font-medium transition-all duration-300
                 ${location.pathname === "/ranking" 
                   ? "text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md hover:shadow-lg" 
                   : "text-white hover:text-purple-200"}`}
