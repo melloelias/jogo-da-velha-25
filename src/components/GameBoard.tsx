@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { X, Circle } from "lucide-react";
 
 interface GameBoardProps {
@@ -47,35 +47,25 @@ const GameBoard = ({ player1, player2, onWin }: GameBoardProps) => {
   }, [board, player1, player2, onWin]);
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-white/80 backdrop-blur-sm border-purple-100 shadow-lg">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-center">
-          {currentPlayer === "X" ? (
-            <div className="flex items-center justify-center gap-2 text-purple-600">
-              <X className="w-5 h-5" />
-              <span>Vez de {player1}</span>
-            </div>
-          ) : (
-            <div className="flex items-center justify-center gap-2 text-pink-600">
-              <Circle className="w-5 h-5" />
-              <span>Vez de {player2}</span>
-            </div>
-          )}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
+    <Card className="w-full max-w-md mx-auto bg-pink-50 rounded-3xl overflow-hidden border-none shadow-xl">
+      <div className="w-full bg-red-600 text-white py-4 px-6 text-xl font-bold text-center">
+        Vez do {currentPlayer === "X" ? player1 : player2}
+      </div>
+      <CardContent className="p-6">
         <div className="game-board">
           {board.map((cell, index) => (
             <button
               key={index}
               onClick={() => handleClick(index)}
-              className={`game-cell ${winningCells.includes(index) ? "winning" : ""}`}
+              className={`game-cell ${winningCells.includes(index) ? "winning" : ""} ${
+                cell === "X" ? "bg-player-x" : cell === "O" ? "bg-[#ea384c]" : "bg-white"
+              }`}
               disabled={!!cell || winningCells.length > 0}
             >
               {cell === "X" ? (
-                <X className="w-8 h-8 text-purple-600" />
+                <X className="w-12 h-12 text-white" />
               ) : cell === "O" ? (
-                <Circle className="w-8 h-8 text-pink-600" />
+                <Circle className="w-12 h-12 text-white" />
               ) : null}
             </button>
           ))}
