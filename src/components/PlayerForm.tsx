@@ -22,7 +22,7 @@ const PlayerForm = ({ onStart }: PlayerFormProps) => {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-center">Digite o Nome dos Jogadores</CardTitle>
+        <CardTitle className="text-center text-xl">Digite o Nome dos Jogadores</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
