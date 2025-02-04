@@ -7,6 +7,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
+import { useEffect } from "react";
 
 interface WinnerModalProps {
   winner: string | null;
@@ -16,6 +18,41 @@ interface WinnerModalProps {
 const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (winner) {
+      // Play applause sound
+      const audio = new Audio("/applause.mp3");
+      audio.play();
+
+      // Trigger confetti
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+
+      const colors = ["#0d4bbd", "#ea384c", "#FFD700"];
+
+      (function frame() {
+        confetti({
+          particleCount: 3,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: colors,
+        });
+        confetti({
+          particleCount: 3,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: colors,
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  }, [winner]);
+
   if (!winner) return null;
 
   return (
@@ -23,8 +60,8 @@ const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center flex flex-col items-center gap-4">
-            <Trophy className="w-12 h-12 text-yellow-500" />
-            <span>Parabéns, {winner}!</span>
+            <Trophy className="w-12 h-12 text-yellow-500 animate-bounce" />
+            <span className="animate-fade-in">Parabéns, {winner}!</span>
           </DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-4 mt-4">
