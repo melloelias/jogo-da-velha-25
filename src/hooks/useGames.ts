@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { getGames } from "@/services/api";
 
 type Game = {
   id: string;
-  winner_name: string | null;
+  player1: string;
+  player2: string;
+  winner: string;
   created_at: string;
 };
 
@@ -26,18 +28,12 @@ export const useGames = () => {
   }, []);
 
   const fetchGames = async () => {
-    const { data, error } = await supabase
-      .from("games")
-      .select("*")
-      .not("winner_name", "is", null)
-      .order("created_at", { ascending: false });
-
-    if (error) {
+    try {
+      const data = await getGames();
+      setGames(data || []);
+    } catch (error) {
       console.error("Error fetching games:", error);
-      return;
     }
-
-    setGames(data || []);
   };
 
   const handleSort = (key: keyof Game) => {
@@ -61,7 +57,7 @@ export const useGames = () => {
   });
 
   const filteredGames = sortedGames.filter((game) =>
-    game.winner_name?.toLowerCase().includes(search.toLowerCase())
+    game.winner?.toLowerCase().includes(search.toLowerCase())
   );
 
   return {
