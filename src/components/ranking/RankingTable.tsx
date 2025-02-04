@@ -9,7 +9,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { format } from "date-fns";
-import { Game } from "@/services/api";
+
+type Game = {
+  id: string;
+  winner_name: string | null;
+  created_at: string;
+};
 
 type SortConfig = {
   key: keyof Game | null;
