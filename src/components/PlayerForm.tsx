@@ -28,9 +28,9 @@ const PlayerForm = ({ onStart }: PlayerFormProps) => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <div className="flex items-center space-x-2">
-              <div className="flex items-center justify-center w-8 h-8 bg-[#1A1F2C] text-white font-bold rounded">
-              X
-            </div>
+              <div className="flex items-center justify-center w-8 h-8 bg-player-x text-white font-bold rounded">
+                X
+              </div>
               <Input
                 placeholder="Nome do Jogador 1"
                 value={player1}
@@ -42,8 +42,8 @@ const PlayerForm = ({ onStart }: PlayerFormProps) => {
           <div className="space-y-2">
             <div className="flex items-center space-x-2">
               <div className="flex items-center justify-center w-8 h-8 bg-[#ea384c] text-white font-bold rounded">
-              O
-            </div>
+                O
+              </div>
               <Input
                 placeholder="Nome do Jogador 2"
                 value={player2}

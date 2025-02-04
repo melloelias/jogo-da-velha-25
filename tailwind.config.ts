@@ -19,6 +19,7 @@ export default {
 		},
 		extend: {
 			colors: {
+				'player-x': '#0d4bbd',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
