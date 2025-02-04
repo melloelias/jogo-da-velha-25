@@ -47,7 +47,7 @@ const GameBoard = ({ player1, player2, onWin }: GameBoardProps) => {
   }, [board, player1, player2, onWin]);
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-pink-50 rounded-3xl overflow-hidden border-none shadow-xl">
+    <Card className="w-full max-w-xl mx-auto bg-pink-50/90 backdrop-blur-sm rounded-3xl overflow-hidden border-none shadow-xl">
       <div 
         className={`w-full text-white py-4 px-6 text-xl font-bold text-center ${
           currentPlayer === "X" ? "bg-player-x" : "bg-[#ea384c]"
@@ -55,7 +55,7 @@ const GameBoard = ({ player1, player2, onWin }: GameBoardProps) => {
       >
         Vez do {currentPlayer === "X" ? player1 : player2}
       </div>
-      <CardContent className="p-6">
+      <CardContent className="p-8">
         <div className="game-board">
           {board.map((cell, index) => (
             <button

@@ -30,7 +30,6 @@ const Index = () => {
     }
 
     try {
-      // Create a new game record
       const { data, error } = await supabase
         .from("games")
         .insert({
@@ -87,16 +86,23 @@ const Index = () => {
 
   return (
     <div className="min-h-screen pt-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        {!gameState.started ? (
-          <PlayerForm onStart={handleStart} />
-        ) : (
-          <GameBoard
-            player1={gameState.player1}
-            player2={gameState.player2}
-            onWin={handleWin}
-          />
-        )}
+      <div className="max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          <div className="lg:sticky lg:top-24">
+            {!gameState.started ? (
+              <PlayerForm onStart={handleStart} />
+            ) : null}
+          </div>
+          <div className="lg:min-h-[600px] flex items-center justify-center">
+            {gameState.started && (
+              <GameBoard
+                player1={gameState.player1}
+                player2={gameState.player2}
+                onWin={handleWin}
+              />
+            )}
+          </div>
+        </div>
         <WinnerModal winner={winner} onNewGame={handleNewGame} />
       </div>
     </div>
