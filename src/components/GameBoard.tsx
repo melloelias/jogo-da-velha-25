@@ -48,7 +48,11 @@ const GameBoard = ({ player1, player2, onWin }: GameBoardProps) => {
 
   return (
     <Card className="w-full max-w-md mx-auto bg-pink-50 rounded-3xl overflow-hidden border-none shadow-xl">
-      <div className="w-full bg-red-600 text-white py-4 px-6 text-xl font-bold text-center">
+      <div 
+        className={`w-full text-white py-4 px-6 text-xl font-bold text-center ${
+          currentPlayer === "X" ? "bg-player-x" : "bg-[#ea384c]"
+        }`}
+      >
         Vez do {currentPlayer === "X" ? player1 : player2}
       </div>
       <CardContent className="p-6">
