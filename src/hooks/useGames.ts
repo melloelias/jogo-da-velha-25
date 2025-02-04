@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-
-type Game = {
-  id: string;
-  winner_name: string | null;
-  created_at: string;
-};
+import { Game, getGames } from "@/services/api";
 
 type SortConfig = {
   key: keyof Game | null;
@@ -26,18 +20,12 @@ export const useGames = () => {
   }, []);
 
   const fetchGames = async () => {
-    const { data, error } = await supabase
-      .from("games")
-      .select("*")
-      .not("winner_name", "is", null)
-      .order("created_at", { ascending: false });
-
-    if (error) {
+    try {
+      const data = await getGames();
+      setGames(data || []);
+    } catch (error) {
       console.error("Error fetching games:", error);
-      return;
     }
-
-    setGames(data || []);
   };
 
   const handleSort = (key: keyof Game) => {
