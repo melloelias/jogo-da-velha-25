@@ -3,13 +3,15 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Trophy } from "lucide-react";
+import { Trophy, Volume2Off } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
-import { useEffect } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useEffect, useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface WinnerModalProps {
   winner: string | null;
@@ -19,23 +21,20 @@ interface WinnerModalProps {
 const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [audioError, setAudioError] = useState(false);
 
   useEffect(() => {
     if (winner) {
       // Play applause sound
       try {
         const audio = new Audio("/applause.mp3");
-        audio.volume = 1.0; // Máximo volume
+        audio.volume = 1.0;
         const playPromise = audio.play();
 
         if (playPromise !== undefined) {
           playPromise.catch((error) => {
             console.error("Error playing audio:", error);
-            toast({
-              title: "Erro ao reproduzir som",
-              description: "Não foi possível reproduzir o som de aplausos",
-              variant: "destructive",
-            });
+            setAudioError(true);
           });
         }
 
@@ -67,14 +66,10 @@ const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
         })();
       } catch (error) {
         console.error("Error setting up audio:", error);
-        toast({
-          title: "Erro ao configurar som",
-          description: "Não foi possível configurar o som de aplausos",
-          variant: "destructive",
-        });
+        setAudioError(true);
       }
     }
-  }, [winner, toast]);
+  }, [winner]);
 
   if (!winner) return null;
 
@@ -86,6 +81,16 @@ const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
             <Trophy className="w-12 h-12 text-yellow-500 animate-bounce" />
             <span className="animate-fade-in">Parabéns, {winner}!</span>
           </DialogTitle>
+          <DialogDescription className="text-center">
+            {audioError && (
+              <Alert variant="destructive" className="mt-4">
+                <Volume2Off className="h-4 w-4" />
+                <AlertDescription>
+                  Não foi possível reproduzir o som de aplausos
+                </AlertDescription>
+              </Alert>
+            )}
+          </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col gap-4 mt-4">
           <Button onClick={onNewGame}>Novo Jogo</Button>
