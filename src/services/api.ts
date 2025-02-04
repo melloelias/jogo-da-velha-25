@@ -7,7 +7,7 @@ export const saveGame = async (gameData: {
   winner: string;
 }) => {
   try {
-    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(API_URL)}/games`, {
+    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(`${API_URL}/games`)}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const saveGame = async (gameData: {
 
 export const getGames = async () => {
   try {
-    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(API_URL)}/games`);
+    const response = await fetch(`${CORS_PROXY}${encodeURIComponent(`${API_URL}/games`)}`);
     
     if (!response.ok) {
       throw new Error("Failed to fetch games");
