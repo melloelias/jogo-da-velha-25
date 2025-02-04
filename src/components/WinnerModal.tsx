@@ -9,6 +9,7 @@ import { Trophy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { useEffect } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface WinnerModalProps {
   winner: string | null;
@@ -17,41 +18,63 @@ interface WinnerModalProps {
 
 const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (winner) {
       // Play applause sound
-      const audio = new Audio("/applause.mp3");
-      audio.play();
+      try {
+        const audio = new Audio("/applause.mp3");
+        audio.volume = 1.0; // Máximo volume
+        const playPromise = audio.play();
 
-      // Trigger confetti
-      const duration = 3 * 1000;
-      const end = Date.now() + duration;
-
-      const colors = ["#0d4bbd", "#ea384c", "#FFD700"];
-
-      (function frame() {
-        confetti({
-          particleCount: 3,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: colors,
-        });
-        confetti({
-          particleCount: 3,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: colors,
-        });
-
-        if (Date.now() < end) {
-          requestAnimationFrame(frame);
+        if (playPromise !== undefined) {
+          playPromise.catch((error) => {
+            console.error("Error playing audio:", error);
+            toast({
+              title: "Erro ao reproduzir som",
+              description: "Não foi possível reproduzir o som de aplausos",
+              variant: "destructive",
+            });
+          });
         }
-      })();
+
+        // Trigger confetti
+        const duration = 3 * 1000;
+        const end = Date.now() + duration;
+
+        const colors = ["#0d4bbd", "#ea384c", "#FFD700"];
+
+        (function frame() {
+          confetti({
+            particleCount: 3,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: colors,
+          });
+          confetti({
+            particleCount: 3,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: colors,
+          });
+
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        })();
+      } catch (error) {
+        console.error("Error setting up audio:", error);
+        toast({
+          title: "Erro ao configurar som",
+          description: "Não foi possível configurar o som de aplausos",
+          variant: "destructive",
+        });
+      }
     }
-  }, [winner]);
+  }, [winner, toast]);
 
   if (!winner) return null;
 
