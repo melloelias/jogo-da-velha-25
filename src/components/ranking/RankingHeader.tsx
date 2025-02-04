@@ -15,7 +15,7 @@ type RankingHeaderProps = {
 export const RankingHeader = ({ onExport }: RankingHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
-      <CardTitle className="flex items-center gap-2">
+      <CardTitle className="flex items-center gap-2 text-xl">
         <Trophy className="w-6 h-6 text-yellow-500" />
         <span>Ranking de Vencedores</span>
       </CardTitle>
