@@ -86,20 +86,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-7xl">
+      <div className="container max-w-4xl mx-auto">
         {!gameState.started ? (
           <div className="flex justify-center">
             <PlayerForm onStart={handleStart} />
           </div>
         ) : (
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="flex justify-center w-full col-span-2 lg:col-span-1">
-              <GameBoard
-                player1={gameState.player1}
-                player2={gameState.player2}
-                onWin={handleWin}
-              />
-            </div>
+          <div className="flex justify-center">
+            <GameBoard
+              player1={gameState.player1}
+              player2={gameState.player2}
+              onWin={handleWin}
+            />
           </div>
         )}
         <WinnerModal winner={winner} onNewGame={handleNewGame} />
