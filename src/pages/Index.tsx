@@ -87,13 +87,13 @@ const Index = () => {
   return (
     <div className="min-h-screen pt-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
-          <div className="lg:sticky lg:top-24">
+        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[600px]">
+          <div className="flex justify-center w-full col-span-2 lg:col-span-1">
             {!gameState.started ? (
               <PlayerForm onStart={handleStart} />
             ) : null}
           </div>
-          <div className="lg:min-h-[600px] flex items-center justify-center">
+          <div className="flex items-center justify-center w-full col-span-2 lg:col-span-1">
             {gameState.started && (
               <GameBoard
                 player1={gameState.player1}
