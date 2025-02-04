@@ -6,7 +6,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Trophy, Volume2Off } from "lucide-react";
+import { Trophy, VolumeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
@@ -84,7 +84,7 @@ const WinnerModal = ({ winner, onNewGame }: WinnerModalProps) => {
           <DialogDescription className="text-center">
             {audioError && (
               <Alert variant="destructive" className="mt-4">
-                <Volume2Off className="h-4 w-4" />
+                <VolumeOff className="h-4 w-4" />
                 <AlertDescription>
                   Não foi possível reproduzir o som de aplausos
                 </AlertDescription>
