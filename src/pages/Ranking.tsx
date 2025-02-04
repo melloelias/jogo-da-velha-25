@@ -29,12 +29,12 @@ const Ranking = () => {
   );
 
   return (
-    <div className="min-h-screen pt-20 px-4">
+    <div className="min-h-screen pt-20 px-4 pb-8">
       <Card className="max-w-4xl mx-auto">
-        <CardHeader>
+        <CardHeader className="px-4 sm:px-6">
           <RankingHeader onExport={exportData} />
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-4 sm:px-6">
           <div className="mb-4">
             <Input
               placeholder="Buscar vencedores..."
@@ -49,11 +49,11 @@ const Ranking = () => {
             onSort={handleSort}
           />
         </CardContent>
-        <CardFooter className="flex justify-between items-center">
-          <div className="text-sm text-muted-foreground">
+        <CardFooter className="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 sm:px-6">
+          <div className="text-sm text-muted-foreground order-2 sm:order-1">
             Total de registros: {filteredGames.length}
           </div>
-          <div className="ml-auto">
+          <div className="w-full sm:w-auto order-1 sm:order-2">
             <RankingPagination
               currentPage={currentPage}
               totalPages={totalPages}

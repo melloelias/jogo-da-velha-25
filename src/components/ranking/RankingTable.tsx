@@ -29,34 +29,34 @@ type RankingTableProps = {
 
 export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) => {
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border overflow-x-auto">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-12"></TableHead>
-            <TableHead>
+            <TableHead className="w-12 px-2 sm:px-4"></TableHead>
+            <TableHead className="min-w-[120px]">
               <Button
                 variant="ghost"
                 onClick={() => onSort('winner_name')}
-                className="flex items-center gap-1"
+                className="font-semibold hover:text-primary"
               >
                 Vencedor
               </Button>
             </TableHead>
-            <TableHead>
+            <TableHead className="min-w-[100px]">
               <Button
                 variant="ghost"
                 onClick={() => onSort('created_at')}
-                className="flex items-center gap-1"
+                className="font-semibold hover:text-primary"
               >
                 Data
               </Button>
             </TableHead>
-            <TableHead>
+            <TableHead className="min-w-[80px]">
               <Button
                 variant="ghost"
                 onClick={() => onSort('created_at')}
-                className="flex items-center gap-1"
+                className="font-semibold hover:text-primary"
               >
                 Hora
               </Button>
@@ -68,7 +68,7 @@ export const RankingTable = ({ games, sortConfig, onSort }: RankingTableProps) =
             const date = new Date(game.created_at);
             return (
               <TableRow key={game.id}>
-                <TableCell>
+                <TableCell className="px-2 sm:px-4">
                   <Trophy className="w-4 h-4 text-yellow-500" />
                 </TableCell>
                 <TableCell className="font-medium">
